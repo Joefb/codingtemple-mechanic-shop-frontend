@@ -1,4 +1,4 @@
-const Sidebar = () => {
+const Sidebar = ({ setShowTechForm }) => {
   return (
     <div className="flex flex-col h-full p-4">
       {/* Logo or brand at top */}
@@ -9,8 +9,8 @@ const Sidebar = () => {
         <a href="#" className="flex items-center gap-3 px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800">
           🏠 Home
         </a>
-        <a href="#" className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
-          👥 Add Mechanic
+        <a href="#" className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800" onClick={() => setShowTechForm(true)}>
+          👥 Add Tech
         </a>
         <a href="#" className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
           ⚙️ Create Ticket

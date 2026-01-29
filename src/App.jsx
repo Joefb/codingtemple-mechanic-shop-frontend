@@ -1,6 +1,8 @@
 import { Typography, Card } from "@material-tailwind/react";
 import Layout from "./components/Layout";
 import ServiceTickets from "./components/ServiceTickets";
+import { useState } from "react";
+import AddTechForm from "./components/AddTechForm";
 
 export default function App() {
   const mockTickets = [
@@ -22,9 +24,41 @@ export default function App() {
     },
   ];
 
+  const mockTech = {
+    firstName: "BadAss",
+    lastName: "Bob",
+    position: "tech",
+    phoneNumber: "555-123-4567",
+    password: "password"
+  }
+
+  const [showTechForm, setShowTechForm] = useState(false)
+
+  const handleCreateTech = (mockTech) => {
+    console.log('its working!')
+
+    setShowTechForm(false)
+  }
+
   return (
-    <Layout>
-      <h1 className="text-3xl font-bold">Mechanic Dashboard</h1>
+    <Layout setShowTechForm={setShowTechForm}>
+      {/* <RecipeNavbar onAddRecipeClick={() => setShowAddRecipeForm(true)} /> */}
+      {showTechForm && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-8 rounded shadow-lg relative w-screen m-10">
+            <button
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+              onClick={() => setShowTechForm(false)}
+            >
+              &times;
+            </button>
+            {/* <AddTechForm recipesData={recipesData} setRecipesData={setRecipesData} /> */}
+            <AddTechForm />
+          </div>
+        </div>
+      )}
+
+      <h1 className="text-3xl font-bold">Tech Dashboard</h1>
       <div className="mb-6 font-bold mt-6">
         <p>Tickets</p>
       </div>
