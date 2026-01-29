@@ -10,14 +10,10 @@ const Sidebar = () => {
           🏠 Home
         </a>
         <a href="#" className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
-          👥 Users
+          👥 Add Mechanic
         </a>
         <a href="#" className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
-          ⚙️ Settings
-        </a>
-        <a href="#" className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
-          📊
-          Analytics
+          ⚙️ Create Ticket
         </a>
       </nav>
 

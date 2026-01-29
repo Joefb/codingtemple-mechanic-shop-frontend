@@ -3,14 +3,14 @@ import React from 'react';
 
 const ServiceTicketCard = ({ ticket }) => {
   const {
+    ticketId,
     customerId,
     workDescription,
-    vin,
+    vehicle,
     serviceDate,
     price,
   } = ticket;
 
-  // Optional: format the date nicely
   const formattedDate = serviceDate
     ? new Date(serviceDate).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -19,7 +19,6 @@ const ServiceTicketCard = ({ ticket }) => {
     })
     : 'Not scheduled';
 
-  // Optional: format price with 2 decimal places
   const formattedPrice = price != null
     ? `$${Number(price).toFixed(2)}`
     : '—';
@@ -38,7 +37,7 @@ const ServiceTicketCard = ({ ticket }) => {
       {/* Header / Top bar */}
       <div className="bg-gray-50 px-5 py-3 border-b border-gray-200 flex justify-between items-center">
         <div className="font-medium text-gray-800">
-          Ticket #{customerId}
+          Ticket #{ticketId}
         </div>
         <div className="text-sm font-semibold text-blue-600">
           {formattedPrice}
@@ -47,22 +46,22 @@ const ServiceTicketCard = ({ ticket }) => {
 
       {/* Main content */}
       <div className="p-5 space-y-4">
-        <div>
-          <div className="text-gray-500 text-xs uppercase tracking-wide mb-1">
-            Service Date
-          </div>
-          <div className="text-gray-800">
-            {formattedDate}
-          </div>
-        </div>
 
         <div className="grid grid-cols-2 gap-4 text-sm">
           <div>
             <div className="text-gray-500 text-xs uppercase tracking-wide mb-1">
-              VIN
+              Service Date
+            </div>
+            <div className="text-gray-800">
+              {formattedDate}
+            </div>
+          </div>
+          <div>
+            <div className="text-gray-500 text-xs uppercase tracking-wide mb-1">
+              Make & Model
             </div>
             <div className="font-mono text-gray-800">
-              {vin || '—'}
+              {vehicle || '—'}
             </div>
           </div>
         </div>
@@ -95,7 +94,7 @@ const ServiceTicketCard = ({ ticket }) => {
           rounded-md 
           transition-colors
         ">
-          View Details
+          Complete Ticket
         </button>
         <button className="
           px-4 py-1.5 
