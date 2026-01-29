@@ -7,7 +7,7 @@ const Layout = ({ children, showSidebar = true }) => {
   return (
     <div className="flex h-dvh w-screen overflow-hidden bg-gray-50 dark:bg-gray-950">
       {showSidebar && (
-        <aside className="hidden md:block md:w-72 lg:w-80 shrink-0 border-r border-gray-200 dark:border-gray-800 overflow-y-auto">
+        <aside className="hidden md:block md:w-44 lg:w-48 shrink-0 border-r border-gray-200 dark:border-gray-800 overflow-y-auto">
           <Sidebar />
         </aside>
       )}
