@@ -1,5 +1,4 @@
-// src/components/ServiceTicketCard.jsx
-import React from 'react';
+import { useState } from 'react';
 
 const ServiceTicketCard = ({ ticket }) => {
   const {
@@ -10,6 +9,8 @@ const ServiceTicketCard = ({ ticket }) => {
     serviceDate,
     price,
   } = ticket;
+
+  const [startWorkButton, setStartWorkButton] = useState("idle");
 
   const formattedDate = serviceDate
     ? new Date(serviceDate).toLocaleDateString('en-US', {
@@ -89,22 +90,25 @@ const ServiceTicketCard = ({ ticket }) => {
       <div className="px-5 py-3 bg-gray-50 border-t border-gray-200 flex justify-end gap-3 text-sm">
         <button className="
           px-4 py-1.5 
-          text-gray-700 
+          text-gray-700
           hover:bg-gray-200 
           rounded-md 
           transition-colors
         ">
           Complete Ticket
         </button>
-        <button className="
-          px-4 py-1.5 
-          bg-blue-600 
-          text-white 
-          hover:bg-blue-700 
-          rounded-md 
-          transition-colors
-        ">
-          Start Work
+
+        <button
+          onClick={() => setStartWorkButton("inprogress")}
+          className={`
+        px-4 py-1.5
+        ${startWorkButton === "inprogress" ? "bg-green-500 hover:bg-green-600" : "bg-blue-600 hover:bg-blue-700"}
+        text-white
+        rounded-md
+        transition-colors
+      `}
+        >
+          {startWorkButton === "inprogress" ? "In Progress" : "Start Work"}
         </button>
       </div>
     </div>
