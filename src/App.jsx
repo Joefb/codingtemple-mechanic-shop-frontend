@@ -3,6 +3,7 @@ import Layout from "./components/Layout";
 import ServiceTickets from "./components/ServiceTickets";
 import { useState } from "react";
 import AddTechForm from "./components/AddTechForm";
+import AddTicketForm from "./components/AddTicketForm";
 
 export default function App() {
   const mockTickets = [
@@ -33,6 +34,7 @@ export default function App() {
   }
 
   const [showTechForm, setShowTechForm] = useState(false)
+  const [showTicketForm, setShowTicketForm] = useState(false)
 
   const handleCreateTech = (mockTech) => {
     console.log('its working!')
@@ -41,8 +43,7 @@ export default function App() {
   }
 
   return (
-    <Layout setShowTechForm={setShowTechForm}>
-      {/* <RecipeNavbar onAddRecipeClick={() => setShowAddRecipeForm(true)} /> */}
+    <Layout setShowTechForm={setShowTechForm} setShowTicketForm={setShowTicketForm}>
       {showTechForm && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-8 rounded shadow-lg relative w-screen m-10">
@@ -52,8 +53,21 @@ export default function App() {
             >
               &times;
             </button>
-            {/* <AddTechForm recipesData={recipesData} setRecipesData={setRecipesData} /> */}
-            <AddTechForm />
+            <AddTechForm setShowTechForm={setShowTechForm} />
+          </div>
+        </div>
+      )}
+
+      {showTicketForm && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-8 rounded shadow-lg relative w-screen m-10">
+            <button
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+              onClick={() => setShowTicketForm(false)}
+            >
+              &times;
+            </button>
+            <AddTicketForm setShowTicketForm={setShowTicketForm} />
           </div>
         </div>
       )}

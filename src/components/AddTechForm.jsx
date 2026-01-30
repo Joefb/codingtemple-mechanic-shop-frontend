@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const AddTechForm = ({ onSubmit, onCancel }) => {
+const AddTechForm = ({ onSubmit, onCancel, setShowTechForm }) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -156,7 +156,7 @@ const AddTechForm = ({ onSubmit, onCancel }) => {
         <div className="flex justify-end gap-4 pt-4 border-t border-gray-200">
           <button
             type="button"
-            onClick={onCancel}
+            onClick={() => setShowTechForm(false)}
             className="
               px-5 py-2.5 
               text-gray-700 
