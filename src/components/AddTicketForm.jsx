@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
 
-// customer_id="1"
-// date="1-23-2026"
-// status="Need oil change"
-// total_cost="234.00"
-// vehicle="Ford Shitter"
-
 const AddTicketForm = ({ onSubmit, onCancel, setShowTicketForm }) => {
   const [formData, setFormData] = useState({
     customer_id: '',

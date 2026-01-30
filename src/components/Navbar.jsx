@@ -6,8 +6,8 @@ const Navbar = () => {
 
       {/* Right side - user actions */}
       <div className="flex items-center gap-4">
-        <button className="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">
-          🔔 Notifications
+        <button className="p-2 rounded bg-blue-700 hover:bg-blue-600 text-white w-32">
+          Logout
         </button>
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-full bg-gray-300"></div>
