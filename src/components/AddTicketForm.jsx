@@ -97,24 +97,25 @@ const AddTicketForm = ({ onSubmit, onCancel, setShowTicketForm }) => {
             />
           </div>
 
-          {/* status */}
+          {/* vehicle */}
           <div>
-            <label htmlFor="status" className="block text-sm font-medium text-gray-700 mb-1">
-              Work Details *
+            <label htmlFor="vehicle" className="block text-sm font-medium text-gray-700 mb-1">
+              Vehicle Year/Make/Model *
             </label>
             <input
-              type="text"
-              id="status"
-              name="status"
-              value={formData.status}
+              type="vehicle"
+              id="vehicle"
+              name="vehicle"
+              value={formData.vehicle}
               onChange={handleChange}
               className="
-                w-full px-4 py-2 border border-gray-300 rounded-md
-                focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-              "
-              placeholder="Customer reports strange noise when accelerating."
+              w-full px-4 py-2 border border-gray-300 rounded-md
+              focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+            "
+              placeholder="1999 Ford Taurus"
             />
           </div>
+
 
           {/* total cost */}
           <div>
@@ -136,26 +137,22 @@ const AddTicketForm = ({ onSubmit, onCancel, setShowTicketForm }) => {
           </div>
         </div>
 
-        {/* vehicle */}
+        {/* status */}
         <div>
-          <label htmlFor="vehicle" className="block text-sm font-medium text-gray-700 mb-1">
-            Vehicle Year/Make/Model *
+          <label htmlFor="status" className="block text-sm font-medium text-gray-700 mb-1">
+            Work Details *
           </label>
-          <input
-            type="vehicle"
-            id="vehicle"
-            name="vehicle"
-            value={formData.vehicle}
+          <textarea
+            id="status"
+            name="status"
+            value={formData.status}
             onChange={handleChange}
             className="
-              w-full px-4 py-2 border border-gray-300 rounded-md
-              focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-            "
-            placeholder="1999 Ford Taurus"
+                w-full h-56 px-4 py-2 border border-gray-300 rounded-md
+                focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+              "
+            placeholder={`Customer reports strange noise when accelerating. \n- Check brakes\n- Check tire balance`}
           />
-          <p className="mt-1 text-xs text-gray-500">
-            Technician should change this on first login.
-          </p>
         </div>
 
         {/* buttons */}
