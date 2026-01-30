@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+import { useAuth } from '../contexts/AuthContext';
 
-const TechLoginForm = ({ onSubmit, onCancel, setShowTicketForm }) => {
+// const TechLoginForm = ({ setShowTicketForm }) => {
+const TechLoginForm = () => {
+  const { login } = useAuth();
+
   const [formData, setFormData] = useState({
     last_name: '',
     password: '',
@@ -14,22 +18,17 @@ const TechLoginForm = ({ onSubmit, onCancel, setShowTicketForm }) => {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // I think the backend api call would go here. 
-    // Or maybe the backend call is in the grobal context?
-    onSubmit({
-      last_name: formData.last_name.trim(),
-      // Do I need to hash this?
-      password: formData.password.trim(),
-    });
+    await login(formData.last_name, formData.password);
 
-    // reset form
     setFormData({
       last_name: '',
       password: '',
     });
+
+    // setShowTicketForm(false);
   };
 
   return (

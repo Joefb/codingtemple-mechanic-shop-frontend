@@ -4,6 +4,8 @@ import ServiceTickets from "./components/ServiceTickets";
 import { useState } from "react";
 import AddTechForm from "./components/AddTechForm";
 import AddTicketForm from "./components/AddTicketForm";
+import TechLoginForm from "./components/TechLoginForm";
+import { useAuth } from "./contexts/AuthContext";
 
 export default function App() {
   const mockTickets = [
@@ -35,6 +37,9 @@ export default function App() {
 
   const [showTechForm, setShowTechForm] = useState(false)
   const [showTicketForm, setShowTicketForm] = useState(false)
+  const [showTechLoginForm, setShowTechLoginForm] = useState(true)
+  const { isAuthenticated } = useAuth()
+
 
   const handleCreateTech = (mockTech) => {
     console.log('its working!')
@@ -44,6 +49,20 @@ export default function App() {
 
   return (
     <Layout setShowTechForm={setShowTechForm} setShowTicketForm={setShowTicketForm}>
+      {!isAuthenticated && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-8 rounded shadow-lg relative w-screen m-10">
+            <button
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+              onClick={() => setShowTechForm(false)}
+            >
+              &times;
+            </button>
+            <TechLoginForm />
+          </div>
+        </div>
+      )}
+
       {showTechForm && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-8 rounded shadow-lg relative w-screen m-10">
@@ -58,19 +77,21 @@ export default function App() {
         </div>
       )}
 
-      {showTicketForm && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white p-8 rounded shadow-lg relative w-screen m-10">
-            <button
-              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
-              onClick={() => setShowTicketForm(false)}
-            >
-              &times;
-            </button>
-            <AddTicketForm setShowTicketForm={setShowTicketForm} />
+      {
+        showTicketForm && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+            <div className="bg-white p-8 rounded shadow-lg relative w-screen m-10">
+              <button
+                className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+                onClick={() => setShowTicketForm(false)}
+              >
+                &times;
+              </button>
+              <AddTicketForm setShowTicketForm={setShowTicketForm} />
+            </div>
           </div>
-        </div>
-      )}
+        )
+      }
 
       <h1 className="text-3xl font-bold">Tech Dashboard</h1>
       <div className="mb-6 font-bold mt-6">
@@ -81,6 +102,6 @@ export default function App() {
           <ServiceTickets key={ticket.ticketId} ticket={ticket} />
         ))}
       </div>
-    </Layout>
+    </Layout >
   )
 }

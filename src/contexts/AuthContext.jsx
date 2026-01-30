@@ -26,17 +26,17 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   // Login function
-  const login = async (email, password) => { //sending api request to login with email and password
+  const login = async (last_name, password) => { //sending api request to login with email and password
 
     console.log('Send login request');
 
-    const response = await fetch("http://127.0.0.1:5000/users/login", {
+    const response = await fetch("http://127.0.0.1:5000/tech/login", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        email: email,
+        last_name: last_name,
         password: password
       })
     });
@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   const registerUser = async (registerUser) => {
-    const response = await fetch("http://127.0.0.1:5000/users", {
+    const response = await fetch("http://127.0.0.1:5000/tech", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -64,7 +64,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   const updateUser = async (updateData) => {
-    const response = await fetch("http://127.0.0.1:5000/users", {
+    const response = await fetch("http://127.0.0.1:5000/tech", {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   const deleteUser = async () => {
-    const response = fetch("http://127.0.0.1:5000/users", {
+    const response = fetch("http://127.0.0.1:5000/", {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
