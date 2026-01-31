@@ -15,6 +15,8 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
+  const [techData, setTechData] = useState(null);
+  const [invoiceData, setInvoiceData] = useState(null);
 
   //Grab already logged in user
   useEffect(() => {
@@ -43,19 +45,48 @@ export const AuthProvider = ({ children }) => {
 
     console.log("Response");
     const loginData = await response.json();
+    setTechData(loginData);
     console.log('Token data:', loginData);
 
     setToken(loginData.token);
-    setUser(loginData.user);
+    setUser(loginData.first_name);
     localStorage.setItem("token", loginData.token);
-    localStorage.setItem("user", JSON.stringify(loginData.user)); //transforming the user into json readable string
+    localStorage.setItem("user", JSON.stringify(loginData.first_name)); //transforming the user into json readable string
+  }
+
+  const createInvoice = async (createInvoice) => {
+    const response = await fetch("http://127.0.0.1:5000/invoice", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify(createInvoice)
+    })
+    const responseData = await response.json();
+    console.log(responseData);
+  }
+
+  const getInvoices = async () => {
+    const response = await fetch("http://127.0.0.1:5000/invoice", {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      // body: JSON.stringify(createInvoice)
+    })
+    const responseData = await response.json();
+    setInvoiceData(responseData);
+    console.log(responseData);
   }
 
   const registerUser = async (registerUser) => {
     const response = await fetch("http://127.0.0.1:5000/tech", {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
       },
       body: JSON.stringify(registerUser)
     })
@@ -101,9 +132,13 @@ export const AuthProvider = ({ children }) => {
   const value = {
     token,
     user,
+    techData,
+    invoiceData,
     login,
     logout,
     registerUser,
+    createInvoice,
+    getInvoices,
     updateUser,
     deleteUser,
     isAuthenticated: token ? true : false

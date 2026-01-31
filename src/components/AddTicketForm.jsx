@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useAuth } from '../contexts/AuthContext';
 
-const AddTicketForm = ({ onSubmit, onCancel, setShowTicketForm }) => {
+const AddTicketForm = ({ setShowTicketForm }) => {
+  const { createInvoice } = useAuth();
   const [formData, setFormData] = useState({
     customer_id: '',
     date: '',
@@ -17,19 +19,16 @@ const AddTicketForm = ({ onSubmit, onCancel, setShowTicketForm }) => {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // I think the backend api call would go here. 
-    // Or maybe the backend call is in the grobal context?
-    onSubmit({
-      customer_id: formData.customer_id.trim(),
-      date: formData.date.trim(),
-      status: formData.status.trim(),
-      total_cost: formData.total_cost.trim(),
-      // Hmmm I gotta hash this as well.
-      vehicle: formData.vehicle,
-    });
+    await createInvoice(
+      formData.customer_id.trim(),
+      formData.date.trim(),
+      formData.status.trim(),
+      formData.total_cost.trim(),
+      formData.vehicle.trim(),
+    )
 
     // reset form
     setFormData({

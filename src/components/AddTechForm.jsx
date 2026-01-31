@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
+import { useAuth } from '../contexts/AuthContext';
 
-const AddTechForm = ({ onSubmit, onCancel, setShowTechForm }) => {
+
+const AddTechForm = ({ setShowTechForm }) => {
+  const { registerUser } = useAuth();
+
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    first_name: '',
+    last_name: '',
     position: '',
-    phoneNumber: '',
+    phone_number: '',
     password: '',
   });
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -17,27 +22,24 @@ const AddTechForm = ({ onSubmit, onCancel, setShowTechForm }) => {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // I think the backend api call would go here. 
-    // Or maybe the backend call is in the grobal context?
-    onSubmit({
-      firstName: formData.firstName.trim(),
-      lastName: formData.lastName.trim(),
-      position: formData.position.trim(),
-      phoneNumber: formData.phoneNumber.trim(),
-      // Hmmm I gotta hash this as well.
-      password: formData.password,
-    });
+    await registerUser(
+      formData.first_name,
+      formData.last_name,
+      formData.password,
+      formData.phone_number,
+      formData.position,
+    )
 
     // reset form
     setFormData({
-      firstName: '',
-      lastName: '',
-      position: '',
-      phoneNumber: '',
+      first_name: '',
+      last_name: '',
       password: '',
+      phone_number: '',
+      position: '',
     });
   };
 
@@ -55,14 +57,14 @@ const AddTechForm = ({ onSubmit, onCancel, setShowTechForm }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {/* first name */}
           <div>
-            <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="first_name" className="block text-sm font-medium text-gray-700 mb-1">
               First Name *
             </label>
             <input
               type="text"
-              id="firstName"
-              name="firstName"
-              value={formData.firstName}
+              id="first_name"
+              name="first_name"
+              value={formData.first_name}
               onChange={handleChange}
               className="
                 w-full px-4 py-2 border border-gray-300 rounded-md
@@ -74,14 +76,14 @@ const AddTechForm = ({ onSubmit, onCancel, setShowTechForm }) => {
 
           {/* last name */}
           <div>
-            <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="last_name" className="block text-sm font-medium text-gray-700 mb-1">
               Last Name *
             </label>
             <input
               type="text"
-              id="lastName"
-              name="lastName"
-              value={formData.lastName}
+              id="last_name"
+              name="last_name"
+              value={formData.last_name}
               onChange={handleChange}
               className="
                 w-full px-4 py-2 border border-gray-300 rounded-md
@@ -112,14 +114,14 @@ const AddTechForm = ({ onSubmit, onCancel, setShowTechForm }) => {
 
           {/* phone Number */}
           <div>
-            <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="phone_number" className="block text-sm font-medium text-gray-700 mb-1">
               Phone Number *
             </label>
             <input
-              type="tel"
-              id="phoneNumber"
-              name="phoneNumber"
-              value={formData.phoneNumber}
+              type="text"
+              id="phone_number"
+              name="phone_number"
+              value={formData.phone_number}
               onChange={handleChange}
               className="
                 w-full px-4 py-2 border border-gray-300 rounded-md
@@ -181,7 +183,7 @@ const AddTechForm = ({ onSubmit, onCancel, setShowTechForm }) => {
               focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
             "
           >
-            Create Technician
+            Create Tech
           </button>
         </div>
       </form>
