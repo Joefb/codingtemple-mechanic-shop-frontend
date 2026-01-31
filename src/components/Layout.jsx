@@ -5,14 +5,14 @@ import Sidebar from './Sidebar';
 import { useAuth } from '../contexts/AuthContext';
 
 // const Layout = ({ children, showSidebar = true, setShowTechForm, setShowTicketForm }) => {
-const Layout = ({ children, setShowTechForm, setShowTicketForm }) => {
+const Layout = ({ children, setShowTechForm, setShowTicketForm, setShowTechProfile }) => {
   const { isAuthenticated } = useAuth()
 
   return (
     <div className="flex h-dvh w-screen overflow-hidden bg-gray-50 dark:bg-gray-950">
       {isAuthenticated && (
         <aside className="hidden md:block md:w-44 lg:w-48 shrink-0 border-r border-gray-200 dark:border-gray-800 overflow-y-auto">
-          <Sidebar setShowTechForm={setShowTechForm} setShowTicketForm={setShowTicketForm} />
+          <Sidebar setShowTechForm={setShowTechForm} setShowTicketForm={setShowTicketForm} setShowTechProfile={setShowTechProfile} />
         </aside>
       )}
 

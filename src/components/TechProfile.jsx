@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 
-const AddTechForm = ({ setShowTechForm }) => {
-  const { registerUser } = useAuth();
+const TechProfile = ({ setShowTechProfile }) => {
+  const { user, updateUser } = useAuth();
 
   const [formData, setFormData] = useState({
     first_name: '',
@@ -24,7 +24,7 @@ const AddTechForm = ({ setShowTechForm }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    await registerUser(
+    await updateUser(
       formData.first_name,
       formData.last_name,
       formData.password,
@@ -47,7 +47,7 @@ const AddTechForm = ({ setShowTechForm }) => {
       {/* header */}
       <div className="bg-gray-50 px-6 py-4 border-b border-gray-200">
         <h2 className="text-lg font-semibold text-gray-800">
-          Add New Technician
+          Update Technician
         </h2>
       </div>
 
@@ -157,7 +157,7 @@ const AddTechForm = ({ setShowTechForm }) => {
         <div className="flex justify-end gap-4 pt-4 border-t border-gray-200">
           <button
             type="button"
-            onClick={() => setShowTechForm(false)}
+            onClick={() => setShowTechProfile(false)}
             className="
               px-5 py-2.5 
               text-gray-700 
@@ -182,7 +182,7 @@ const AddTechForm = ({ setShowTechForm }) => {
               focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
             "
           >
-            Create Tech
+            Update Info
           </button>
         </div>
       </form>
@@ -190,4 +190,4 @@ const AddTechForm = ({ setShowTechForm }) => {
   );
 }
 
-export default AddTechForm
+export default TechProfile
