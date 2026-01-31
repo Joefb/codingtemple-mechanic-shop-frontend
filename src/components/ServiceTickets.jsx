@@ -2,26 +2,25 @@ import { useState } from 'react';
 
 const ServiceTicketCard = ({ ticket }) => {
   const {
-    ticketId,
-    customerId,
-    workDescription,
+    customer_id,
+    date,
+    status,
+    total_cost,
     vehicle,
-    serviceDate,
-    price,
   } = ticket;
 
   const [startWorkButton, setStartWorkButton] = useState("idle");
 
-  const formattedDate = serviceDate
-    ? new Date(serviceDate).toLocaleDateString('en-US', {
+  const formattedDate = date
+    ? new Date(date).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
     })
     : 'Not scheduled';
 
-  const formattedPrice = price != null
-    ? `$${Number(price).toFixed(2)}`
+  const formattedPrice = total_cost != null
+    ? `$${Number(total_cost).toFixed(2)}`
     : '—';
 
   return (
@@ -38,7 +37,7 @@ const ServiceTicketCard = ({ ticket }) => {
       {/* Header / Top bar */}
       <div className="bg-gray-50 px-5 py-3 border-b border-gray-200 flex justify-between items-center">
         <div className="font-medium text-gray-800">
-          Ticket #{ticketId}
+          Customer ID #{customer_id}
         </div>
         <div className="text-sm font-semibold text-blue-600">
           {formattedPrice}
@@ -81,7 +80,7 @@ const ServiceTicketCard = ({ ticket }) => {
             overflow-y-auto
             pr-2
           ">
-            {workDescription || 'No description provided.'}
+            {status || 'No description provided.'}
           </div>
         </div>
       </div>

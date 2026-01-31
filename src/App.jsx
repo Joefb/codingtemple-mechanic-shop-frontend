@@ -38,7 +38,7 @@ export default function App() {
   const [showTechForm, setShowTechForm] = useState(false)
   const [showTicketForm, setShowTicketForm] = useState(false)
   const [showTechLoginForm, setShowTechLoginForm] = useState(true)
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated, invoiceData, getInvoices } = useAuth()
 
 
   const handleCreateTech = (mockTech) => {
@@ -96,11 +96,17 @@ export default function App() {
       {isAuthenticated && (
         <>
           <h1 className="text-3xl font-bold">Tech Dashboard</h1>
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-600"
+            onClick={() => getInvoices()}
+          >
+            Refresh Tickets
+          </button>
           <div className="mb-6 font-bold mt-6">
             <p>Tickets</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {mockTickets.map((ticket) => (
+            {invoiceData.map((ticket) => (
               <ServiceTickets key={ticket.ticketId} ticket={ticket} />
             ))}
           </div>
@@ -109,3 +115,10 @@ export default function App() {
     </Layout >
   )
 }
+
+
+// <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+//   {mockTickets.map((ticket) => (
+//     <ServiceTickets key={ticket.ticketId} ticket={ticket} />
+//   ))}
+
